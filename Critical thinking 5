@@ -1,0 +1,79 @@
+import java.util.Scanner;
+
+public class MonthlyTemperatures {
+    public static void main(String[] args) {
+        // Initialize arrays for months and temperatures
+        String[] months = {
+            "January", "February", "March", "April", "May", "June", 
+            "July", "August", "September", "October", "November", "December"
+        };
+        
+        double[] temperatures = new double[12];
+        
+        // Scanner for user input
+        Scanner scanner = new Scanner(System.in);
+        
+        // Input temperatures for each month
+        for (int i = 0; i < 12; i++) {
+            System.out.print("Enter the average temperature for " + months[i] + ": ");
+            temperatures[i] = scanner.nextDouble();
+        }
+        
+        while (true) {
+            // Prompt the user for the month
+            System.out.print("\nEnter the month to view (or 'year' for the yearly summary, 'exit' to quit): ");
+            String input = scanner.next().toLowerCase();
+
+            if (input.equals("exit")) {
+                break;
+            } else if (input.equals("year")) {
+                // Calculate and display the yearly summary
+                double totalTemperature = 0;
+                double highestTemperature = Double.MIN_VALUE;
+                double lowestTemperature = Double.MAX_VALUE;
+                String highestMonth = "";
+                String lowestMonth = "";
+
+                for (int i = 0; i < 12; i++) {
+                    System.out.println(months[i] + ": " + temperatures[i] + "°C");
+                    totalTemperature += temperatures[i];
+                    
+                    // Find the highest temperature
+                    if (temperatures[i] > highestTemperature) {
+                        highestTemperature = temperatures[i];
+                        highestMonth = months[i];
+                    }
+                    
+                    // Find the lowest temperature
+                    if (temperatures[i] < lowestTemperature) {
+                        lowestTemperature = temperatures[i];
+                        lowestMonth = months[i];
+                    }
+                }
+
+                double yearlyAverage = totalTemperature / 12;
+                System.out.printf("\nYearly Average Temperature: %.2f°C\n", yearlyAverage);
+                System.out.println("Highest Temperature: " + highestTemperature + "°C (" + highestMonth + ")");
+                System.out.println("Lowest Temperature: " + lowestTemperature + "°C (" + lowestMonth + ")");
+            } else {
+                // Display the temperature for the specified month
+                int monthIndex = -1;
+
+                for (int i = 0; i < 12; i++) {
+                    if (months[i].toLowerCase().equals(input)) {
+                        monthIndex = i;
+                        break;
+                    }
+                }
+
+                if (monthIndex != -1) {
+                    System.out.println(months[monthIndex] + ": " + temperatures[monthIndex] + "°C");
+                } else {
+                    System.out.println("Invalid month entered. Please try again.");
+                }
+            }
+        }
+        
+        scanner.close();
+    }
+}

@@ -1,0 +1,57 @@
+public class Home {
+    // Private variables to store home details
+    private String homeModel;
+    private String homeAddress;
+    private int homeZipCode;
+
+    // Constructor to initialize the Home object
+    public Home(String homeModel, String homeAddress, int homeZipCode) {
+        this.homeModel = homeModel;
+        this.homeAddress = homeAddress;
+        this.homeZipCode = homeZipCode;
+    }
+
+    // Method to remove home information
+    public String RemoveHome(String homeModel, String homeAddress, int homeZipCode) {
+        if (this.homeModel.equals(homeModel) && 
+            this.homeAddress.equals(homeAddress) && 
+            this.homeZipCode == homeZipCode) {
+            
+            // Remove home information
+            this.homeModel = null;
+            this.homeAddress = null;
+            this.homeZipCode = 0;
+
+            return "Home information removed successfully.";
+        } else {
+            return "Error: Provided information does not match the stored values.";
+        }
+    }
+
+    // Method to update the home address
+    public String UpdateHomeAddress(String newAddress) {
+        if (newAddress != null && !newAddress.isEmpty()) {
+            this.homeAddress = newAddress;
+            return "Home address updated successfully.";
+        } else {
+            return "Error: Invalid new address.";
+        }
+    }
+
+    // Method to retrieve home details
+    public String GetHomeDetails() {
+        return "Home Model: " + this.homeModel + 
+               ", Address: " + this.homeAddress + 
+               ", Zip Code: " + this.homeZipCode;
+    }
+
+    // Method to change the home model
+    public String ChangeHomeModel(String newModel) {
+        if (newModel != null && !newModel.isEmpty()) {
+            this.homeModel = newModel;
+            return "Home model updated successfully.";
+        } else {
+            return "Error: Invalid home model.";
+        }
+    }
+}

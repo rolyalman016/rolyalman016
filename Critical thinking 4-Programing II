@@ -1,0 +1,263 @@
+
+Option #2:  Creating an Abstract Class Shape II
+
+ Class Rectangle. I
+// Base Shape class (assuming this is defined)
+class Shape {
+    // Shape class can have common attributes and methods for all shapes
+}
+
+// Rectangle class extending Shape
+public class Rectangle extends Shape {
+    private double width;
+    private double length;
+
+    // Parameterized constructor to initialize width and length
+    public Rectangle(double width, double length) {
+        if (width <= 0 || length <= 0) {
+            throw new IllegalArgumentException("Width and Length must be positive");
+        }
+        this.width = width;
+        this.length = length;
+    }
+
+    // Method to calculate area of the rectangle
+    public double getArea() {
+        return width * length;
+    }
+
+    // Method to calculate perimeter of the rectangle
+    public double getPerimeter() {
+        return 2 * (width + length);
+    }
+
+    // Overriding toString method to print area and perimeter
+    @Override
+    public String toString() {
+        return "Rectangle with width: " + width + " and length: " + length + "\n" +
+               "Area: " + String.format("%.2f", getArea()) + "\n" +
+               "Perimeter: " + String.format("%.2f", getPerimeter());
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        Rectangle rectangle = new Rectangle(7, 14);  // Creating a rectangle object with width 5 and length 10
+        System.out.println(rectangle.toString());    // Printing rectangle details
+    }
+}
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+Class Circle. II
+// Base Shape class (assuming this is defined)
+class Shape {
+    // Shape class can have common attributes and methods for all shapes
+}
+
+// Circle class extending Shape
+public class Circle extends Shape {
+    private double radius;
+
+    // Parameterized constructor to initialize radius
+    public Circle(double radius) {
+        if (radius <= 0) {
+            throw new IllegalArgumentException("Radius must be positive");
+        }
+        this.radius = radius;
+    }
+
+    // Method to calculate area of the circle
+    public double getArea() {
+        return Math.PI * Math.pow(radius, 2);
+    }
+
+    // Method to calculate perimeter of the circle
+    public double getPerimeter() {
+        return 2 * Math.PI * radius;
+    }
+
+    // Overriding toString method to print area and perimeter
+    @Override
+    public String toString() {
+        return "Circle with radius: " + radius + "\n" +
+               "Area: " + String.format("%.2f", getArea()) + "\n" +
+               "Perimeter: " + String.format("%.2f", getPerimeter());
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        Circle circle = new Circle(5);  // Creating a circle object with radius 5
+        System.out.println(circle.toString());  // Printing circle details
+    }
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Class triangle. III
+// Base Shape class (assuming this is defined)
+class Shape {
+    // Shape class can have common attributes and methods for all shapes
+}
+
+// Triangle class extending Shape
+public class Triangle extends Shape {
+    private double side1;
+    private double side2;
+    private double side3;
+
+    // Parameterized constructor to initialize the sides of the triangle
+    public Triangle(double side1, double side2, double side3) {
+        if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
+            throw new IllegalArgumentException("Sides must be positive");
+        }
+        if (!isValidTriangle(side1, side2, side3)) {
+            throw new IllegalArgumentException("The given sides do not form a valid triangle");
+        }
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    // Method to check if the given sides form a valid triangle
+    private boolean isValidTriangle(double s1, double s2, double s3) {
+        // Triangle inequality theorem: Sum of any two sides must be greater than the third side
+        return (s1 + s2 > s3) && (s1 + s3 > s2) && (s2 + s3 > s1);
+    }
+
+    // Method to calculate the perimeter of the triangle
+    public double getPerimeter() {
+        return side1 + side2 + side3;
+    }
+
+    // Method to calculate the area of the triangle using Heron's formula
+    public double getArea() {
+        double s = getPerimeter() / 2;  // Semi-perimeter
+        return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    }
+
+    // Overriding toString method to print area and perimeter
+    @Override
+    public String toString() {
+        return "Triangle with sides: " + side1 + ", " + side2 + ", " + side3 + "\n" +
+               "Area: " + String.format("%.2f", getArea()) + "\n" +
+               "Perimeter: " + String.format("%.2f", getPerimeter());
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        Triangle triangle = new Triangle(7, 8, 9);  // Creating a triangle object with sides 3, 4, and 5
+        System.out.println(triangle.toString());    // Printing triangle details
+    }
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+Class ShapeArray. IV
+// File: ShapeArray.java
+
+// Abstract base class for all shapes
+abstract class Shape {
+    public abstract String toString(); // Abstract method to be overridden by subclasses
+}
+
+// Triangle class extending Shape
+class Triangle extends Shape {
+    private double base, height;
+
+    public Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return "Triangle [Base: " + base + ", Height: " + height + "]";
+    }
+}
+
+// Circle class extending Shape
+class Circle extends Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return "Circle [Radius: " + radius + "]";
+    }
+}
+
+// Square class extending Shape
+class Square extends Shape {
+    private double side;
+
+    public Square(double side) {
+        this.side = side;
+    }
+
+    @Override
+    public String toString() {
+        return "Square [Side: " + side + "]";
+    }
+}
+
+// Driver class named ShapeArray
+public class ShapeArray {
+    public static void main(String[] args) {
+        // Instantiate shapes
+        Shape triangle = new Triangle(5.0, 10.0);
+        Shape circle = new Circle(7.0);
+        Shape square = new Square(4.0);
+
+        // Store instances in an array
+        Shape[] shapeArray = { triangle, circle, square };
+
+        // Loop through the array and print instance data
+        for (Shape shape : shapeArray) {
+            System.out.println(shape.toString());
+        }
+    }
+}
+
+
